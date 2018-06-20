@@ -1,0 +1,32 @@
+##################################################1
+
+##To start a new project in Django##
+1.  Open Windows Powershell
+2.  Change directory
+3.  $django-admin startproject <Project name goes here>
+
+
+##################################################2
+
+##To create a new app in a project##
+1.  Open Windows Powershell
+2.  Change directory
+3.  $django-admin startapp <App name goes here>
+4.  After creating any app we need to add 'AppName' to the installed list in settings.py  
+
+##Setting basic url stuff##
+1.  All the urls need to be stored in the urls.py file in the main app's file (not other new apps) but to not make things messy over there we use the
+	include() function from urls (from django.conf.urls). 
+2.	We create a urls.py file for every new app we make. For example if we start a new app called accounts then we will make a new urls.py file in the
+	accounts app firectory and link it to the main app's url.py file with include().
+	--> url(r'^accounts/', include('accounts.urls')), 
+		We add this to our main urls.py file. Whenever the url starts with 'accounts', accounts.urls.py takes care of it.
+
+##How are urls and views linked##
+1.  With every url there has to be an views.py function lionked to it. 
+2.	For example: url(r'^$', views.home) calls the home(request) function in the views.py file.
+3.	-->Whatever our function does is what happens at that particular url
+		def home(request):
+    		return HttpResponse('WELCOME BACK.')
+    	This home function returns and HTTP response which just displays 'WELCOME BACK.' on out www.siteName.com/accounts
+    	
