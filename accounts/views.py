@@ -2,5 +2,5 @@ from django.shortcuts import render, HttpResponse
 
 
 def home(request):
-    return HttpResponse('WELCOME BACK.')
+    return render(request, 'accounts/login.html')
 
