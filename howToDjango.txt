@@ -29,4 +29,77 @@
 		def home(request):
     		return HttpResponse('WELCOME BACK.')
     	This home function returns and HTTP response which just displays 'WELCOME BACK.' on out www.siteName.com/accounts
-    	
+
+
+##################################################3
+
+##Templates##
+1.	We include all our HTML files in a template folder.
+2.	This template folder is created inside a particular app for only and only its HTML files.
+3.	For example: in the accounts app if we want to add a login template for the home page
+	--> make the following: accounts/templates/accounts/login.html
+4.	def home(request):
+    	return render(request, 'accounts/login.html')   #render function will bbe used to load in any HTML file
+    													#render() automatically searches for the path in appName/templates directory
+5.	This prevents the problem of not having a repetitive file name and makes the project look clean.
+
+
+##################################################4
+
+##BOOTSTRAP##
+1. 	Go to your HTML file and include the following lines in the header section. We can dowmload bootstrap and use the CDN (content  
+	delivery networ, basically using bootstrap from there servers).
+	-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+2.	Check out documents to know more about classes.
+
+
+##################################################5
+
+##STATIC FILES##
+1.	In settings.py, make sure that there is 'django.contrib.staticfiles' present in the INSTALLED_APPS list and STATIC_URL = '/static/' somewhere.
+2.	Static files contain css, images and etc.
+3.	Create a new directory named static, in static create a new tory named accounts and here you can create your css files or images.
+3.	Assume we created login.css, now we need to link this with login.html, to do that add a link to the css file and load it.
+	-->
+		{% load static %}  #use staticfiles for older versions of django
+		<link rel="stylesheet" href="{% static 'accounts/login.css' %}" type="text/css">
+
+4.	{% ... %} : This is called ginger tool templating
+
+
+##################################################6
+
+##Ginger Templating in Django##
+1.	To use python cmds or variables in our HTML we use ginger templating.
+2.	{{ ... }} : Is used to deal with variables
+3.	{% ... %} : Is used to deal with commands like load, for, while, if-else and stuff.
+4.	All these variables have to passed by the functions present in views.py.
+5.	For example to pass a name and a list through a function, we need a dictionary to store the data. We then pass this data through the render function.
+6.	def HOME(request):
+		name = 'Aadway'
+		listOfNums = [1,2,3,4,5]
+		args = {'name': name, 'numList': listOfNums}
+		return render(request, 'accounts/login.html', args)
+7.	To use this in our HTML file we just need to use ginger templating.
+	For example: <h1>{{ name }}</h1> will display Aadway
+			   : To use the number list we can use a for loop
+			     <li>
+			     	<ul> {{ for number in numList }} </ul>\
+			     </li>
+
+
+##################################################7
+
+##Extend and blocks##
+1.	To have a base HTML template in more than a single page( eg. we need bootstrap header in every page ) we create one single base.html and extend it in the rest
+	of our pages. Create base.html in the template\ directory.
+2.	Blocks help us to do so. In base.html create the usual html template and then add {% block head %} ... {% endblock %} in the head and one for body too.
+	These blocks will be overwritten in the html file extending the base file.
+
+
+
+
+
