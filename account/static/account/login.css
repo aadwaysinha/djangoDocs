@@ -2,7 +2,12 @@ body{
     background-color: lightblue;
 }
 
+div#loginForm {
+    margin-left: 40%;
+}
+
 .jumbotron {
+    margin-top: 4%;
     background: grey;
     padding-top: 48px;
     padding-bottom: 48px;

@@ -20,7 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('accounts.urls')),  # We don't want to make this messy. Therefore we create a whole new
+    url(r'^account/', include('account.urls')),  # We don't want to make this messy. Therefore we create a whole new
                                                    # urls.py file for our apps and include it over here.
                                                    # whenever there is a call starting with a particular app name,
                                                    # it is directed from here to it's own urls.py file
