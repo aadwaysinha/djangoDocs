@@ -100,6 +100,58 @@
 	These blocks will be overwritten in the html file extending the base file.
 
 
+##################################################8
+
+##Creating a LOGIN PAGE##
+1.	There's an inbuilt login funcion in django.contrib.auth.views, import login from there
+2.	<form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Login</button>
+    </form>
+    This invokes a login function. Put this form in login.html.
+3.	csrf_token: Cross-Site Request Forgery. Included for security purposes.
 
 
+##################################################9
+
+##DATABASE and MIGRATION##
+1.	Thed default database is mentioned in the DABATASE dictionary of settings.py. (default DB: sqlite3)
+2.	Cmd to apply migrations(changes in the db) is: python manage.py migrate and then python manage.py makemigrations
+3.	Cmd to create a superuser(admin) is: python manage.py createsuperuser
+4.	We login with our superuser ID and pass.
+5.	On a successful login, django, by default, directs to /accounts/profile. We can change this to any url of our choice(for eg. /account/) we add a 
+	LOGIN_REDIRECT_URL = '/account/' in settings.py
+
+
+##################################################11
+
+##Models (SCHEMA)##
+1.	Models are basically the SQL tables.
+2.	Stored in python as classes.
+3.	Inherits from models.Model
+	from django.db import models
+4.	on_delete: https://stackoverflow.com/questions/38388423/what-does-on-delete-do-on-django-models
+
+
+##################################################12
+
+#TRIGGER CODE/SIGNAL##
+1.	Generally triggered whenever there are changes made in any model of our project.
+2.	To fire a trigger whenever we create a new user is created to save it to our database
+	-->from django.db.models.signals import post_save
+		def create_profile(sender, **kwargs)
+			if kwargs['created']:
+				user_profile = UserProfile.objexts.create(user=kwargs['instance'])
+
+		post_save.connect(create_profile, sender=User)
+
+
+##################################################13
+
+##Login redirect from home page##
+1.	Create a views.py in main directory.
+2.	def login_redirect(request):
+		return redirect('/account/login')
+3.	In urls.py import the function and hook it up with the r'^$' url.
 

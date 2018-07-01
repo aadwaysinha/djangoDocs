@@ -10,6 +10,15 @@
 </head>
 <body>
     {% block body %}
+        <body style="height:1500px">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+          <a class="navbar-brand" href="#">SummerTests</a>
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href='/account/logout'>Logout</a>
+            </li>
+          </ul>
+        </nav>
         <h1 class="jumbotron">Welcome to the home page</h1>
     {% endblock %}
 </body>
