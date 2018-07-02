@@ -120,7 +120,7 @@
 2.	Cmd to apply migrations(changes in the db) is: python manage.py migrate and then python manage.py makemigrations
 3.	Cmd to create a superuser(admin) is: python manage.py createsuperuser
 4.	We login with our superuser ID and pass.
-5.	On a successful login, django, by default, directs to /accounts/profile. We can change this to any url of our choice(for eg. /account/) we add a 
+5.	On a successful login, django, by default, directs to /accounts/profile. We can change this to any url of our choice(for eg. /account/) 	we add a 
 	LOGIN_REDIRECT_URL = '/account/' in settings.py
 
 
@@ -155,3 +155,29 @@
 		return redirect('/account/login')
 3.	In urls.py import the function and hook it up with the r'^$' url.
 
+
+##################################################14
+
+##Login/logout URLS and homepage redirection to login page##
+1.	We can create a logout page the same way we created the login page. There's an inbluit function in django.auth.views. Hook thios logout		function with a template.
+2.	To craete a login redirect from the home page, we need to import redirect from django.shortcuts and create a login_redirect function 
+	in views.py of our main directory. This would save us from creating another template in the main directory.
+	def login_redirect(request):
+		return redirect('/account/login')
+
+
+##################################################15
+
+##Creating a registeration form##
+1.	Import the inbulit form UserCreationForm from django.contrib.auth.forms
+2.	Use this function to create a registeration form. Hook this up with a URL and a template.
+	def register(request):
+	    if request.method == 'POST':
+	        form = UserCreationForm(request.POST)
+	        if form.is_valid():
+	            form.save()
+	            return redirect('/account')
+	    else:
+	        form = UserCreationForm()
+	        args = {'form': form}
+	        return render(request, 'account/reg_form.html', args)
